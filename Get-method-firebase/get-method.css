@@ -1,0 +1,273 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+body {
+
+    min-height: 100vh;
+    background: #f2f4f8;
+
+    padding: 40px;
+
+}
+
+
+
+.user-title {
+
+    text-align: center;
+
+    color: #333;
+
+    margin-bottom: 35px;
+
+    font-size: 32px;
+
+}
+
+
+
+/* users container */
+
+#wrap-users {
+
+    max-width: 900px;
+
+    margin: auto;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+
+}
+
+
+
+/* user card */
+
+.user {
+
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 18px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+
+    transition: .3s;
+
+}
+
+
+.user:hover {
+
+    transform: translateY(-5px);
+
+}
+
+
+
+/* profile section */
+
+
+.user-profile-wrap {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+}
+
+
+
+.user-profile {
+
+    width: 80px;
+
+    height: 80px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+}
+
+
+
+.user-profile-name {
+
+    color: #222;
+
+    font-size: 22px;
+
+    margin-bottom: 8px;
+
+}
+
+
+
+.user-age {
+
+    display: inline-flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+
+    background: #2563eb;
+
+    color: white;
+
+    width: 35px;
+
+    height: 35px;
+
+    border-radius: 50%;
+
+    font-size: 14px;
+
+    margin-left: 10px;
+
+}
+
+
+
+.user-explanations {
+
+    color: #777;
+
+}
+
+
+
+/* buttons */
+
+
+.btn-groups-column {
+
+    display: flex;
+
+    gap: 10px;
+
+}
+
+
+
+button {
+
+    border: none;
+
+    padding: 10px 18px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    color: white;
+
+    font-size: 15px;
+
+    transition: .3s;
+
+}
+
+
+
+.delete-user-btn {
+
+    background: #ef4444;
+
+}
+
+
+.delete-user-btn:hover {
+
+    background: #dc2626;
+
+}
+
+
+
+.edit-user-btn {
+
+    background: #2563eb;
+
+}
+
+
+.edit-user-btn:hover {
+
+    background: #1d4ed8;
+
+}
+
+
+
+/* messages */
+
+.empty,
+.error {
+
+    text-align: center;
+
+    color: #666;
+
+}
+
+
+
+/* responsive */
+
+
+@media(max-width:700px){
+
+
+    body {
+
+        padding:20px;
+
+    }
+
+
+    .user {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap:20px;
+
+    }
+
+
+    .btn-groups-column {
+
+        width:100%;
+
+    }
+
+
+    button {
+
+        flex:1;
+
+    }
+
+
+}
