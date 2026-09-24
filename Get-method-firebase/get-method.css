@@ -1,3 +1,7 @@
+/* =========================
+   Reset
+========================= */
+
 * {
     margin: 0;
     padding: 0;
@@ -6,171 +10,158 @@
 }
 
 
-body {
+/* =========================
+   Body
+========================= */
 
+body {
     min-height: 100vh;
     background: #f2f4f8;
-
     padding: 40px;
-
 }
 
 
+/* =========================
+   Page title
+========================= */
 
 .user-title {
-
     text-align: center;
-
     color: #333;
-
     margin-bottom: 35px;
-
     font-size: 32px;
-
 }
 
 
-
-/* users container */
+/* =========================
+   Users container
+========================= */
 
 #wrap-users {
-
     max-width: 900px;
-
     margin: auto;
 
     display: flex;
-
     flex-direction: column;
-
     gap: 20px;
-
 }
 
 
-
-/* user card */
+/* =========================
+   User card
+========================= */
 
 .user {
-
-    background: white;
+    background: #fff;
 
     padding: 20px;
 
     border-radius: 18px;
 
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
 
-    box-shadow: 0 8px 25px rgba(0,0,0,.08);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
 
-    transition: .3s;
-
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
 }
-
 
 .user:hover {
-
     transform: translateY(-5px);
 
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
 }
 
 
-
-/* profile section */
-
+/* =========================
+   Profile
+========================= */
 
 .user-profile-wrap {
-
     display: flex;
-
     align-items: center;
-
     gap: 20px;
 
+    min-width: 0;
 }
-
 
 
 .user-profile {
-
     width: 80px;
-
     height: 80px;
+
+    flex-shrink: 0;
 
     border-radius: 50%;
 
     object-fit: cover;
 
+    background: #e5e7eb;
 }
 
 
+.user-profile-description {
+    min-width: 0;
+}
+
 
 .user-profile-name {
-
     color: #222;
-
     font-size: 22px;
 
     margin-bottom: 8px;
 
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 
-
 .user-age {
-
     display: inline-flex;
 
     justify-content: center;
-
     align-items: center;
 
-
     background: #2563eb;
-
     color: white;
 
     width: 35px;
-
     height: 35px;
 
     border-radius: 50%;
 
     font-size: 14px;
 
-    margin-left: 10px;
-
+    margin-left: 5px;
 }
-
 
 
 .user-explanations {
-
     color: #777;
+    font-size: 14px;
 
+    word-break: break-word;
 }
 
 
-
-/* buttons */
-
+/* =========================
+   Buttons
+========================= */
 
 .btn-groups-column {
-
     display: flex;
-
     gap: 10px;
 
+    flex-shrink: 0;
 }
-
 
 
 button {
-
     border: none;
 
     padding: 10px 18px;
@@ -183,91 +174,227 @@ button {
 
     font-size: 15px;
 
-    transition: .3s;
-
+    transition:
+        background 0.3s ease,
+        transform 0.2s ease;
 }
 
 
+button:hover {
+    transform: translateY(-2px);
+}
+
+
+button:active {
+    transform: translateY(0);
+}
+
 
 .delete-user-btn {
-
     background: #ef4444;
-
 }
 
 
 .delete-user-btn:hover {
-
     background: #dc2626;
-
 }
 
 
-
 .edit-user-btn {
-
     background: #2563eb;
-
 }
 
 
 .edit-user-btn:hover {
-
     background: #1d4ed8;
-
 }
 
 
-
-/* messages */
+/* =========================
+   Messages
+========================= */
 
 .empty,
-.error {
-
+.error,
+.loading {
     text-align: center;
 
     color: #666;
 
+    padding: 30px;
 }
 
 
+.error {
+    color: #dc2626;
+}
 
-/* responsive */
+
+/* =========================
+   Delete Modal
+========================= */
+
+.modal-container {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.55);
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 20px;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+
+    z-index: 1000;
+}
 
 
-@media(max-width:700px){
+.modal-container.visible {
+    opacity: 1;
+    visibility: visible;
+}
 
+
+.modal-content {
+    width: 100%;
+    max-width: 450px;
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 18px;
+
+    text-align: center;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+
+    transform: scale(0.9);
+
+    transition: transform 0.3s ease;
+}
+
+
+.modal-container.visible .modal-content {
+    transform: scale(1);
+}
+
+
+.modal-title {
+    color: #222;
+
+    font-size: 22px;
+
+    line-height: 1.5;
+
+    margin-bottom: 25px;
+}
+
+
+.btn-groups {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+}
+
+
+.btn-groups button {
+    min-width: 100px;
+}
+
+
+.unaccept-btn {
+    background: #6b7280;
+}
+
+
+.unaccept-btn:hover {
+    background: #4b5563;
+}
+
+
+.accept-btn {
+    background: #ef4444;
+}
+
+
+.accept-btn:hover {
+    background: #dc2626;
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 700px) {
 
     body {
+        padding: 20px;
+    }
 
-        padding:20px;
 
+    .user-title {
+        font-size: 26px;
+        margin-bottom: 25px;
     }
 
 
     .user {
-
         flex-direction: column;
 
-        align-items: flex-start;
+        align-items: stretch;
 
-        gap:20px;
+        gap: 20px;
+    }
 
+
+    .user-profile-wrap {
+        width: 100%;
     }
 
 
     .btn-groups-column {
-
-        width:100%;
-
+        width: 100%;
     }
 
 
-    button {
-
-        flex:1;
-
+    .btn-groups-column button {
+        flex: 1;
     }
 
+
+    .user-profile-name {
+        font-size: 19px;
+    }
+
+
+    .user-profile {
+        width: 65px;
+        height: 65px;
+    }
+
+
+    .modal-content {
+        padding: 25px 20px;
+    }
+
+
+    .modal-title {
+        font-size: 19px;
+    }
 
 }
