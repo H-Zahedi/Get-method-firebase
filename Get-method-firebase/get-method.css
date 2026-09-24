@@ -1,400 +1,580 @@
 /* =========================
-   Reset
+Reset
 ========================= */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: Arial, sans-serif;
 }
 
-
 /* =========================
-   Body
+Body
 ========================= */
 
 body {
-    min-height: 100vh;
-    background: #f2f4f8;
-    padding: 40px;
+min-height: 100vh;
+background: #f2f4f8;
+padding: 40px 20px;
 }
 
-
 /* =========================
-   Page title
+Page Title
 ========================= */
 
 .user-title {
-    text-align: center;
-    color: #333;
-    margin-bottom: 35px;
-    font-size: 32px;
+text-align: center;
+color: #333;
+margin-bottom: 35px;
+font-size: 32px;
 }
 
-
 /* =========================
-   Users container
+Users Container
 ========================= */
 
 #wrap-users {
-    max-width: 900px;
-    margin: auto;
+width: 100%;
+max-width: 900px;
+margin: 0 auto;
 
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+display: flex;
+flex-direction: column;
+gap: 20px;
+
+
 }
 
-
 /* =========================
-   User card
+User Card
 ========================= */
 
 .user {
-    background: #fff;
+background: #fff;
 
-    padding: 20px;
+padding: 20px;
 
-    border-radius: 18px;
+border-radius: 18px;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+display: flex;
+justify-content: space-between;
+align-items: center;
 
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+gap: 20px;
 
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
+box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.08);
+
+transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+
+
 }
 
 .user:hover {
-    transform: translateY(-5px);
+transform: translateY(-5px);
 
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.12);
+
+
 }
 
-
 /* =========================
-   Profile
+Profile
 ========================= */
 
 .user-profile-wrap {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+display: flex;
 
-    min-width: 0;
+align-items: center;
+
+gap: 20px;
+
+min-width: 0;
+
+flex: 1;
+
+
 }
-
 
 .user-profile {
-    width: 80px;
-    height: 80px;
+width: 80px;
+height: 80px;
 
-    flex-shrink: 0;
+flex-shrink: 0;
 
-    border-radius: 50%;
+border-radius: 50%;
 
-    object-fit: cover;
+object-fit: cover;
 
-    background: #e5e7eb;
+background: #e5e7eb;
+
+
 }
-
 
 .user-profile-description {
-    min-width: 0;
+min-width: 0;
 }
-
 
 .user-profile-name {
-    color: #222;
-    font-size: 22px;
+color: #222;
 
-    margin-bottom: 8px;
+font-size: 22px;
 
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
+margin-bottom: 8px;
+
+display: flex;
+
+align-items: center;
+
+flex-wrap: wrap;
+
+gap: 8px;
+
+word-break: break-word;
+
+
 }
-
-
-.user-age {
-    display: inline-flex;
-
-    justify-content: center;
-    align-items: center;
-
-    background: #2563eb;
-    color: white;
-
-    width: 35px;
-    height: 35px;
-
-    border-radius: 50%;
-
-    font-size: 14px;
-
-    margin-left: 5px;
-}
-
-
-.user-explanations {
-    color: #777;
-    font-size: 14px;
-
-    word-break: break-word;
-}
-
 
 /* =========================
-   Buttons
+Age
+========================= */
+
+.user-age {
+display: inline-flex;
+
+justify-content: center;
+align-items: center;
+
+background: #2563eb;
+
+color: white;
+
+width: 35px;
+height: 35px;
+
+flex-shrink: 0;
+
+border-radius: 50%;
+
+font-size: 14px;
+
+
+}
+
+/* =========================
+Password / Description
+========================= */
+
+.user-explanations {
+color: #777;
+
+font-size: 14px;
+
+word-break: break-word;
+
+
+}
+
+/* =========================
+Buttons
+========================= */
+
+button {
+border: none;
+
+padding: 10px 18px;
+
+border-radius: 10px;
+
+cursor: pointer;
+
+color: white;
+
+font-size: 15px;
+
+transition:
+    background 0.3s ease,
+    transform 0.2s ease,
+    opacity 0.2s ease;
+
+
+}
+
+button:hover {
+transform: translateY(-2px);
+}
+
+button:active {
+transform: translateY(0);
+}
+
+button:disabled {
+opacity: 0.6;
+
+cursor: not-allowed;
+
+transform: none;
+
+
+}
+
+/* =========================
+User Buttons
 ========================= */
 
 .btn-groups-column {
-    display: flex;
-    gap: 10px;
+display: flex;
 
-    flex-shrink: 0;
+gap: 10px;
+
+flex-shrink: 0;
+
+
 }
-
-
-button {
-    border: none;
-
-    padding: 10px 18px;
-
-    border-radius: 10px;
-
-    cursor: pointer;
-
-    color: white;
-
-    font-size: 15px;
-
-    transition:
-        background 0.3s ease,
-        transform 0.2s ease;
-}
-
-
-button:hover {
-    transform: translateY(-2px);
-}
-
-
-button:active {
-    transform: translateY(0);
-}
-
-
-.delete-user-btn {
-    background: #ef4444;
-}
-
-
-.delete-user-btn:hover {
-    background: #dc2626;
-}
-
 
 .edit-user-btn {
-    background: #2563eb;
+background: #2563eb;
 }
-
 
 .edit-user-btn:hover {
-    background: #1d4ed8;
+background: #1d4ed8;
 }
 
+.delete-user-btn {
+background: #ef4444;
+}
+
+.delete-user-btn:hover {
+background: #dc2626;
+}
 
 /* =========================
-   Messages
+Messages
 ========================= */
 
 .empty,
 .error,
 .loading {
-    text-align: center;
+text-align: center;
 
-    color: #666;
+color: #666;
 
-    padding: 30px;
+padding: 30px;
+
+
 }
-
 
 .error {
-    color: #dc2626;
+color: #dc2626;
 }
 
-
 /* =========================
-   Delete Modal
+Modal
 ========================= */
 
 .modal-container {
-    position: fixed;
+position: fixed;
 
-    inset: 0;
+inset: 0;
 
-    background: rgba(0, 0, 0, 0.55);
+background: rgba(0, 0, 0, 0.55);
 
-    display: flex;
+display: flex;
 
-    justify-content: center;
-    align-items: center;
+justify-content: center;
 
-    padding: 20px;
+align-items: center;
 
-    opacity: 0;
+padding: 20px;
 
-    visibility: hidden;
+opacity: 0;
 
-    transition:
-        opacity 0.3s ease,
-        visibility 0.3s ease;
+visibility: hidden;
 
-    z-index: 1000;
+transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+
+z-index: 1000;
+
+
 }
-
 
 .modal-container.visible {
-    opacity: 1;
-    visibility: visible;
-}
+opacity: 1;
 
+visibility: visible;
+
+
+}
 
 .modal-content {
-    width: 100%;
-    max-width: 450px;
+width: 100%;
 
-    background: white;
+max-width: 450px;
 
-    padding: 30px;
+background: white;
 
-    border-radius: 18px;
+padding: 30px;
 
-    text-align: center;
+border-radius: 18px;
 
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+text-align: center;
 
-    transform: scale(0.9);
+box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.2);
 
-    transition: transform 0.3s ease;
+transform: scale(0.9);
+
+transition:
+    transform 0.3s ease;
+
+
 }
-
 
 .modal-container.visible .modal-content {
-    transform: scale(1);
+transform: scale(1);
+}
+
+/* =========================
+Modal Title
+========================= */
+
+.modal-title {
+color: #222;
+
+font-size: 22px;
+
+line-height: 1.5;
+
+margin-bottom: 25px;
+
+
+}
+
+/* =========================
+Delete Modal Buttons
+========================= */
+
+.btn-groups {
+display: flex;
+
+justify-content: center;
+
+gap: 12px;
+
+
+}
+
+.btn-groups button {
+min-width: 100px;
+}
+
+.unaccept-btn {
+background: #6b7280;
+}
+
+.unaccept-btn:hover {
+background: #4b5563;
+}
+
+.accept-btn {
+background: #ef4444;
+}
+
+.accept-btn:hover {
+background: #dc2626;
+}
+
+/* =========================
+Edit Form
+========================= */
+
+.edit-user-form {
+display: flex;
+
+flex-direction: column;
+
+gap: 18px;
+
+text-align: left;
+
+
+}
+
+.input-field {
+display: flex;
+
+flex-direction: column;
+
+gap: 7px;
+
+
+}
+
+.input-field label {
+color: #333;
+
+font-size: 14px;
+
+font-weight: bold;
+
+
+}
+
+.input-field input {
+width: 100%;
+
+padding: 12px 14px;
+
+border: 1px solid #d1d5db;
+
+border-radius: 10px;
+
+outline: none;
+
+font-size: 15px;
+
+transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+
+}
+
+.input-field input:focus {
+border-color: #2563eb;
+
+box-shadow:
+    0 0 0 3px rgba(37, 99, 235, 0.12);
+
+
+}
+
+/* =========================
+Edit Form Buttons
+========================= */
+
+.modal-form-buttons {
+display: flex;
+
+justify-content: flex-end;
+
+gap: 10px;
+
+margin-top: 5px;
+
+
+}
+
+.modal-form-buttons button {
+min-width: 100px;
+}
+
+.edit-submit-btn {
+background: #2563eb;
+}
+
+.edit-submit-btn:hover {
+background: #1d4ed8;
+}
+
+/* =========================
+Responsive
+========================= */
+
+@media (max-width: 700px) {
+
+body {
+    padding: 20px 15px;
 }
 
 
-.modal-title {
-    color: #222;
-
-    font-size: 22px;
-
-    line-height: 1.5;
+.user-title {
+    font-size: 26px;
 
     margin-bottom: 25px;
 }
 
 
-.btn-groups {
-    display: flex;
+.user {
+    flex-direction: column;
 
-    justify-content: center;
+    align-items: stretch;
 
+    gap: 20px;
+}
+
+
+.user-profile-wrap {
+    width: 100%;
+}
+
+
+.btn-groups-column {
+    width: 100%;
+}
+
+
+.btn-groups-column button {
+    flex: 1;
+}
+
+
+.user-profile-name {
+    font-size: 19px;
+}
+
+
+.user-profile {
+    width: 65px;
+
+    height: 65px;
+}
+
+
+.modal-content {
+    padding: 25px 20px;
+}
+
+
+.modal-title {
+    font-size: 19px;
+}
+
+
+}
+
+@media (max-width: 400px) {
+
+.user-profile-wrap {
     gap: 12px;
 }
 
 
-.btn-groups button {
-    min-width: 100px;
+.user-profile {
+    width: 55px;
+    height: 55px;
 }
 
 
-.unaccept-btn {
-    background: #6b7280;
+.user-profile-name {
+    font-size: 17px;
 }
 
 
-.unaccept-btn:hover {
-    background: #4b5563;
+.modal-form-buttons {
+    flex-direction: column;
 }
 
 
-.accept-btn {
-    background: #ef4444;
+.modal-form-buttons button {
+    width: 100%;
 }
 
-
-.accept-btn:hover {
-    background: #dc2626;
-}
-
-
-/* =========================
-   Responsive
-========================= */
-
-@media (max-width: 700px) {
-
-    body {
-        padding: 20px;
-    }
-
-
-    .user-title {
-        font-size: 26px;
-        margin-bottom: 25px;
-    }
-
-
-    .user {
-        flex-direction: column;
-
-        align-items: stretch;
-
-        gap: 20px;
-    }
-
-
-    .user-profile-wrap {
-        width: 100%;
-    }
-
-
-    .btn-groups-column {
-        width: 100%;
-    }
-
-
-    .btn-groups-column button {
-        flex: 1;
-    }
-
-
-    .user-profile-name {
-        font-size: 19px;
-    }
-
-
-    .user-profile {
-        width: 65px;
-        height: 65px;
-    }
-
-
-    .modal-content {
-        padding: 25px 20px;
-    }
-
-
-    .modal-title {
-        font-size: 19px;
-    }
 
 }

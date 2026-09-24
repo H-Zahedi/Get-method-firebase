@@ -1,77 +1,171 @@
-const usersContainer = document.querySelector('#wrap-users');
+/* =========================
+DOM Elements
+========================= */
 
-const deleteModal = document.querySelector('#delete-modal');
-const cancelDeleteBtn = document.querySelector('#cancel-delete-btn');
-const confirmDeleteBtn = document.querySelector('#confirm-delete-btn');
+const usersContainer =
+document.querySelector('#wrap-users');
+
+const deleteModal =
+document.querySelector('#delete-modal');
+
+const cancelDeleteBtn =
+document.querySelector('#cancel-delete-btn');
+
+const confirmDeleteBtn =
+document.querySelector('#confirm-delete-btn');
+
+const editModal =
+document.querySelector('#edit-modal');
+
+const cancelEditBtn =
+document.querySelector('#cancel-edit-btn');
+
+const editUserForm =
+document.querySelector('#edit-user-form');
+
+const firstnameInput =
+document.querySelector('.firstname');
+
+const lastnameInput =
+document.querySelector('.lastname');
+
+const passwordInput =
+document.querySelector('.password');
+
+const updateUserBtn =
+document.querySelector('#update-user-btn');
+
+/* =========================
+Firebase API
+========================= */
 
 const API_URL =
-    'https://post-method-ef4b4-default-rtdb.firebaseio.com/users';
+'https://post-method-ef4b4-default-rtdb.firebaseio.com/users';
+
+/* =========================
+Current User ID
+========================= */
 
 let userID = null;
 
-
 /* =========================
-   Page Load
+Page Load
 ========================= */
 
-window.addEventListener('DOMContentLoaded', () => {
-    getAllUsers();
-});
+window.addEventListener(
+'DOMContentLoaded',
+() => {
 
+    getAllUsers();
+
+}
+
+
+);
 
 /* =========================
-   Get All Users
+Get All Users
 ========================= */
 
 async function getAllUsers() {
 
-    usersContainer.innerHTML = `
-        <h2 class="loading">
-            Loading users...
-        </h2>
-    `;
-
-    try {
-
-        const response = await fetch(`${API_URL}.json`);
-
-        if (!response.ok) {
-            throw new Error('Failed to fetch users');
-        }
-
-        const data = await response.json();
+usersContainer.innerHTML = `
+    <h2 class="loading">
+        Loading users...
+    </h2>
+`;
 
 
-        /* No users */
+try {
 
-        if (!data) {
-
-            usersContainer.innerHTML = `
-                <h2 class="empty">
-                    No users found
-                </h2>
-            `;
-
-            return;
-        }
+    const response =
+        await fetch(`${API_URL}.json`);
 
 
-        /* Clear old users */
+    if (!response.ok) {
 
-        usersContainer.innerHTML = '';
+        throw new Error(
+            'Failed to fetch users'
+        );
+
+    }
 
 
-        const users = Object.entries(data);
+    const data =
+        await response.json();
 
 
-        /* Create users */
+    /* =========================
+       No Users
+    ========================== */
 
-        users.forEach(([id, userInfo]) => {
+    if (
+        !data ||
+        typeof data !== 'object'
+    ) {
 
-            const firstName = escapeHTML(userInfo.firstname || '');
-            const lastName = escapeHTML(userInfo.lastname || '');
+        usersContainer.innerHTML = `
+            <h2 class="empty">
+                No users found
+            </h2>
+        `;
 
-            const age = userInfo.age || 18;
+        return;
+    }
+
+
+    const users =
+        Object.entries(data);
+
+
+    if (users.length === 0) {
+
+        usersContainer.innerHTML = `
+            <h2 class="empty">
+                No users found
+            </h2>
+        `;
+
+        return;
+    }
+
+
+    /* =========================
+       Clear Container
+    ========================== */
+
+    usersContainer.innerHTML = '';
+
+
+    /* =========================
+       Create User Cards
+    ========================== */
+
+    users.forEach(
+        ([id, userInfo]) => {
+
+            const firstName =
+                escapeHTML(
+                    userInfo?.firstname || ''
+                );
+
+
+            const lastName =
+                escapeHTML(
+                    userInfo?.lastname || ''
+                );
+
+
+            const age =
+                escapeHTML(
+                    userInfo?.age ?? '18'
+                );
+
+
+            const password =
+                escapeHTML(
+                    userInfo?.password || 'No password'
+                );
 
 
             usersContainer.insertAdjacentHTML(
@@ -88,11 +182,13 @@ async function getAllUsers() {
                             loading="lazy"
                         >
 
+
                         <div class="user-profile-description">
 
                             <h2 class="user-profile-name">
 
-                                ${firstName} ${lastName}
+                                ${firstName}
+                                ${lastName}
 
                                 <span class="user-age">
                                     ${age}
@@ -100,8 +196,9 @@ async function getAllUsers() {
 
                             </h2>
 
+
                             <p class="user-explanations">
-                                User ID: ${escapeHTML(id)}
+                                Password: ${password}
                             </p>
 
                         </div>
@@ -114,7 +211,8 @@ async function getAllUsers() {
                         <button
                             type="button"
                             class="edit-user-btn"
-                            data-id="${escapeHTML(id)}">
+                            data-id="${escapeHTML(id)}"
+                        >
                             Edit
                         </button>
 
@@ -122,7 +220,8 @@ async function getAllUsers() {
                         <button
                             type="button"
                             class="delete-user-btn"
-                            data-id="${escapeHTML(id)}">
+                            data-id="${escapeHTML(id)}"
+                        >
                             Delete
                         </button>
 
@@ -132,115 +231,435 @@ async function getAllUsers() {
                 `
             );
 
-        });
+        }
+    );
 
-    } catch (error) {
+} catch (error) {
 
-        console.error('Error:', error);
+    console.error(
+        'Get users error:',
+        error
+    );
 
-        usersContainer.innerHTML = `
-            <h2 class="error">
-                Error loading users. Please try again.
-            </h2>
-        `;
-    }
+
+    usersContainer.innerHTML = `
+        <h2 class="error">
+            Error loading users.
+            Please try again.
+        </h2>
+    `;
+
 }
 
 
+}
+
 /* =========================
-   Open Delete Modal
+Open Delete Modal
 ========================= */
 
 function openDeleteModal(id) {
 
-    userID = id;
+userID = id;
 
-    deleteModal.classList.add('visible');
+deleteModal.classList.add(
+    'visible'
+);
+
+
 }
 
-
 /* =========================
-   Close Delete Modal
+Close Delete Modal
 ========================= */
 
 function closeDeleteModal() {
 
-    deleteModal.classList.remove('visible');
+deleteModal.classList.remove(
+    'visible'
+);
 
-    userID = null;
+userID = null;
+
+
 }
 
-
 /* =========================
-   Delete User
+Delete User
 ========================= */
 
 async function deleteUser() {
 
-    if (!userID) {
-        return;
-    }
+if (!userID) {
+
+    return;
+}
 
 
-    const idToDelete = userID;
+const idToDelete =
+    userID;
 
 
-    try {
+try {
 
-        confirmDeleteBtn.disabled = true;
-        confirmDeleteBtn.textContent = 'Deleting...';
+    confirmDeleteBtn.disabled =
+        true;
 
 
-        const response = await fetch(
-            `${API_URL}/${idToDelete}.json`,
+    confirmDeleteBtn.textContent =
+        'Deleting...';
+
+
+    const response =
+        await fetch(
+            `${API_URL}/${encodeURIComponent(idToDelete)}.json`,
             {
                 method: 'DELETE'
             }
         );
 
 
-        if (!response.ok) {
-            throw new Error('Failed to delete user');
-        }
+    if (!response.ok) {
 
-
-        closeDeleteModal();
-
-        await getAllUsers();
-
-    } catch (error) {
-
-        console.error('Delete error:', error);
-
-        alert('Failed to delete user. Please try again.');
-
-    } finally {
-
-        confirmDeleteBtn.disabled = false;
-        confirmDeleteBtn.textContent = 'Yes';
+        throw new Error(
+            'Failed to delete user'
+        );
 
     }
+
+
+    closeDeleteModal();
+
+
+    await getAllUsers();
+
+
+} catch (error) {
+
+    console.error(
+        'Delete error:',
+        error
+    );
+
+
+    alert(
+        'Failed to delete user. Please try again.'
+    );
+
+
+} finally {
+
+    confirmDeleteBtn.disabled =
+        false;
+
+
+    confirmDeleteBtn.textContent =
+        'Yes';
+
+}
+
+
+}
+
+/* =========================
+Open Edit Modal
+========================= */
+
+async function openEditModal(id) {
+
+userID = id;
+
+
+try {
+
+    const response =
+        await fetch(
+            `${API_URL}/${encodeURIComponent(id)}.json`
+        );
+
+
+    if (!response.ok) {
+
+        throw new Error(
+            'Failed to get user information'
+        );
+
+    }
+
+
+    const userData =
+        await response.json();
+
+
+    if (!userData) {
+
+        throw new Error(
+            'User not found'
+        );
+
+    }
+
+
+    /* =========================
+       Fill Form
+    ========================== */
+
+    firstnameInput.value =
+        userData.firstname || '';
+
+
+    lastnameInput.value =
+        userData.lastname || '';
+
+
+    passwordInput.value =
+        userData.password || '';
+
+
+    /* =========================
+       Open Modal
+    ========================== */
+
+    editModal.classList.add(
+        'visible'
+    );
+
+
+    firstnameInput.focus();
+
+
+} catch (error) {
+
+    console.error(
+        'Open edit error:',
+        error
+    );
+
+
+    alert(
+        'Failed to load user information. Please try again.'
+    );
+
+
+    userID = null;
+
+}
+
+
+}
+
+/* =========================
+Close Edit Modal
+========================= */
+
+function closeEditModal() {
+
+editModal.classList.remove(
+    'visible'
+);
+
+
+editUserForm.reset();
+
+
+userID = null;
+
+
+}
+
+/* =========================
+Update User
+========================= */
+
+async function updateUser(event) {
+
+event.preventDefault();
+
+
+if (!userID) {
+
+    alert(
+        'User ID not found.'
+    );
+
+    return;
+}
+
+
+const firstName =
+    firstnameInput.value.trim();
+
+
+const lastName =
+    lastnameInput.value.trim();
+
+
+const password =
+    passwordInput.value.trim();
+
+
+/* =========================
+   Validation
+========================== */
+
+if (!firstName || !lastName) {
+
+    alert(
+        'Firstname and lastname are required.'
+    );
+
+    return;
 }
 
 
 /* =========================
-   Event Delegation
+   New Data
+========================== */
+
+const userNewData = {
+
+    firstname: firstName,
+
+    lastname: lastName
+
+};
+
+
+/*
+   Update password only
+   when it is not empty.
+*/
+
+if (password) {
+
+    userNewData.password =
+        password;
+
+}
+
+
+const idToUpdate =
+    userID;
+
+
+try {
+
+    updateUserBtn.disabled =
+        true;
+
+
+    updateUserBtn.textContent =
+        'Updating...';
+
+
+    const response =
+        await fetch(
+            `${API_URL}/${encodeURIComponent(idToUpdate)}.json`,
+            {
+                method: 'PATCH',
+
+                headers: {
+                    'Content-Type':
+                        'application/json'
+                },
+
+                body:
+                    JSON.stringify(
+                        userNewData
+                    )
+            }
+        );
+
+
+    if (!response.ok) {
+
+        throw new Error(
+            'Failed to update user'
+        );
+
+    }
+
+
+    const updatedUser =
+        await response.json();
+
+
+    console.log(
+        'Updated user:',
+        updatedUser
+    );
+
+
+    /* =========================
+       Close Modal
+    ========================== */
+
+    closeEditModal();
+
+
+    /* =========================
+       Refresh Users
+    ========================== */
+
+    await getAllUsers();
+
+
+} catch (error) {
+
+    console.error(
+        'Update error:',
+        error
+    );
+
+
+    alert(
+        'Failed to update user. Please try again.'
+    );
+
+
+} finally {
+
+    updateUserBtn.disabled =
+        false;
+
+
+    updateUserBtn.textContent =
+        'Update';
+
+}
+
+
+}
+
+/* =========================
+Users Event Delegation
 ========================= */
 
-usersContainer.addEventListener('click', (event) => {
+usersContainer.addEventListener(
+'click',
+(event) => {
 
     const deleteButton =
-        event.target.closest('.delete-user-btn');
+        event.target.closest(
+            '.delete-user-btn'
+        );
+
 
     const editButton =
-        event.target.closest('.edit-user-btn');
+        event.target.closest(
+            '.edit-user-btn'
+        );
 
 
-    /* Delete */
+    /* =========================
+       Delete
+    ========================== */
 
     if (deleteButton) {
 
-        const id = deleteButton.dataset.id;
+        const id =
+            deleteButton.dataset.id;
+
 
         openDeleteModal(id);
 
@@ -248,77 +667,177 @@ usersContainer.addEventListener('click', (event) => {
     }
 
 
-    /* Edit */
+    /* =========================
+       Edit
+    ========================== */
 
     if (editButton) {
 
-        const id = editButton.dataset.id;
+        const id =
+            editButton.dataset.id;
 
-        console.log('Edit user:', id);
 
-        // You can add your edit functionality here.
+        openEditModal(id);
+
+        return;
     }
 
-});
+}
 
+
+);
 
 /* =========================
-   Modal Buttons
+Delete Modal Buttons
 ========================= */
 
 cancelDeleteBtn.addEventListener(
-    'click',
-    closeDeleteModal
+'click',
+closeDeleteModal
 );
-
 
 confirmDeleteBtn.addEventListener(
-    'click',
-    deleteUser
+'click',
+deleteUser
 );
 
-
 /* =========================
-   Close modal by clicking
-   outside the content
+Edit Modal Buttons
 ========================= */
 
-deleteModal.addEventListener('click', (event) => {
-
-    if (event.target === deleteModal) {
-        closeDeleteModal();
-    }
-
-});
-
+cancelEditBtn.addEventListener(
+'click',
+closeEditModal
+);
 
 /* =========================
-   Close modal with Escape
+Edit Form Submit
 ========================= */
 
-document.addEventListener('keydown', (event) => {
+editUserForm.addEventListener(
+'submit',
+updateUser
+);
+
+/* =========================
+Close Delete Modal
+Outside Click
+========================= */
+
+deleteModal.addEventListener(
+'click',
+(event) => {
 
     if (
-        event.key === 'Escape' &&
-        deleteModal.classList.contains('visible')
+        event.target === deleteModal
     ) {
+
         closeDeleteModal();
+
     }
 
-});
+}
 
+
+);
 
 /* =========================
-   Escape HTML
+Close Edit Modal
+Outside Click
+========================= */
+
+editModal.addEventListener(
+'click',
+(event) => {
+
+    if (
+        event.target === editModal
+    ) {
+
+        closeEditModal();
+
+    }
+
+}
+
+
+);
+
+/* =========================
+Escape Key
+========================= */
+
+document.addEventListener(
+'keydown',
+(event) => {
+
+    if (
+        event.key !== 'Escape'
+    ) {
+
+        return;
+    }
+
+
+    if (
+        deleteModal.classList.contains(
+            'visible'
+        )
+    ) {
+
+        closeDeleteModal();
+
+        return;
+    }
+
+
+    if (
+        editModal.classList.contains(
+            'visible'
+        )
+    ) {
+
+        closeEditModal();
+
+    }
+
+}
+
+
+);
+
+/* =========================
+Escape HTML
 ========================= */
 
 function escapeHTML(value) {
 
-    return String(value)
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
+return String(value)
+
+    .replace(
+        /&/g,
+        '&amp;'
+    )
+
+    .replace(
+        /</g,
+        '&lt;'
+    )
+
+    .replace(
+        />/g,
+        '&gt;'
+    )
+
+    .replace(
+        /"/g,
+        '&quot;'
+    )
+
+    .replace(
+        /'/g,
+        '&#039;'
+    );
+
 
 }

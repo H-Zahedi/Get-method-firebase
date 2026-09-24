@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Users List</title>
 
     <link rel="stylesheet" href="get-method.css">
+
 </head>
 
 <body>
+    <!-- =========================
+     Delete Modal
+========================== -->
 
-    <!-- Delete Modal -->
     <div class="modal-container" id="delete-modal">
+
         <div class="modal-content">
 
             <h1 class="modal-title">
@@ -20,32 +26,113 @@
             </h1>
 
             <div class="btn-groups">
-                <button
-                    type="button"
-                    class="unaccept-btn"
-                    id="cancel-delete-btn">
+
+                <button type="button" class="unaccept-btn" id="cancel-delete-btn">
                     No
                 </button>
 
-                <button
-                    type="button"
-                    class="accept-btn"
-                    id="confirm-delete-btn">
+                <button type="button" class="accept-btn" id="confirm-delete-btn">
                     Yes
                 </button>
+
             </div>
 
         </div>
+
     </div>
 
 
-    <!-- Page title -->
+    <!-- =========================
+     Edit Modal
+========================== -->
+
+    <div class="modal-container" id="edit-modal">
+
+        <div class="modal-content">
+
+            <h1 class="modal-title">
+                Edit User Information
+            </h1>
+
+
+            <form id="edit-user-form" class="edit-user-form">
+
+                <!-- Firstname -->
+
+                <div class="input-field">
+
+                    <label for="firstname">
+                        Firstname
+                    </label>
+
+                    <input type="text" class="firstname" id="firstname" name="firstname" placeholder="Enter firstname"
+                        autocomplete="off" spellcheck="false" required>
+
+                </div>
+
+
+                <!-- Lastname -->
+
+                <div class="input-field">
+
+                    <label for="lastname">
+                        Lastname
+                    </label>
+
+                    <input type="text" class="lastname" id="lastname" name="lastname" placeholder="Enter lastname"
+                        autocomplete="off" spellcheck="false" required>
+
+                </div>
+
+
+                <!-- Password -->
+
+                <div class="input-field">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input type="password" class="password" id="password" name="password" placeholder="Enter password"
+                        autocomplete="new-password" spellcheck="false">
+
+                </div>
+
+
+                <!-- Form Buttons -->
+
+                <div class="modal-form-buttons">
+
+                    <button type="button" class="unaccept-btn" id="cancel-edit-btn">
+                        Cancel
+                    </button>
+
+                    <button type="submit" class="edit-submit-btn" id="update-user-btn">
+                        Update
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+     Page Title
+========================== -->
+
     <h1 class="user-title">
         All Users That You Fetched
     </h1>
 
 
-    <!-- Users -->
+    <!-- =========================
+     Users
+========================== -->
+
     <div id="wrap-users">
 
         <h2 class="loading">
@@ -55,7 +142,12 @@
     </div>
 
 
+    <!-- =========================
+     JavaScript
+========================== -->
+
     <script src="get-method.js"></script>
 
 </body>
+
 </html>
